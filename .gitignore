@@ -1,0 +1,10 @@
+# Playwright
+automation/node_modules/
+automation/test-results/
+automation/playwright-report/
+automation/blob-report/
+automation/playwright/.cache/
+automation/playwright/.auth/
+
+# Arquivos auxiliares
+automation/notes.txt

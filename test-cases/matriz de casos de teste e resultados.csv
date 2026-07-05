@@ -1,0 +1,56 @@
+﻿Plano de Testes — Agenda de contatos;;;;;;;;;;;;
+ID;Caso de Teste;Tipo;Pré-condições;Passos de Execução;Comportamento Esperado;Onde Validar (campo/tela);Resultado;Bug / Observação;Severidade;data do teste;Executado por;Evidencência
+TC-01;cadastrar novo contato com todos os campos preenchidos;cadastro;Estar na tela principal/listagem;"1. Na tela principal clicar no botão ""Novo contato""
+2. preencher o campo nome, tipo e numero
+3. inserir endereço arrastando o marcador do mapa até o endereço, e o campo endereço será setado automaticamente
+4. Clicar no botão salvar, em formato de nuvem";"Quando o usuário clicar em salvar,
+Então o sistema deve exibir um pop-up de confirmação, salvar o contato, redirecionar usuário para tela da listagem e exibir o contato na listagem";Listagem/ Tela principal;Aprovado;;;28/jun;jennifer;https://jam.dev/c/954c147f-59ed-4578-8760-b09d6ee936ed
+TC-02;cadastrar contato sem preencher campos obrigatórios;cadastro;Estar na tela de criação de contato;"1. Na tela principal clicar no botão ""Novo contato""
+2. não preencher nenhum campo e clicar em salvar, no icone de nuvem
+3. todos os campos devem ficar evidenciados em vermelho com a mensagem em rodapé informando que o campo é obrigatório";"Quando o usuário clicar em salvar,
+Então cada campo deve exibir um erro informando ""campo obrigatório""; o sistema não deve salvar o contato e nem apresentar falhas.";Campos: nome, tipo, numero e endereço/ tela de criação de contato;Reprovado;Ao tentar salvar sem preencher os campos, há um erro ocorrendo na tela, havendo a necessidade tratamento de erro quando os campos obrigatórios não estão preenchidos ao salvar.;Alta;28/jun;jennifer;https://jam.dev/c/d17ea745-0b21-4b5b-9699-b2bbeb576758
+TC-03;mover marcador no mapa para obter endereço;cadastro;Estar na tela de criação de contato ;1. Na tela de criação, no mapa a direita, clicar no marcador e arrastar até a localização desejada;"Quando o usuário mover o marcador no mapa,
+Então, onde o marcador parar, um endereço será obtido e o campo ""endereço"" deve ser setado com esse valor.";Campo endereço/ Tela de criação de contato;Aprovado;;;28/jun;jennifer;https://jam.dev/c/ea2760d6-2a5c-4c11-889f-fe9da2916b90
+TC-04;editar endereço sem usar o mapa;edição;Estar na tela de edição;1. Na tela de edição, no campo endereço, clicar e digitar o endereço manualmente;"Quando o usuário clicar no campo endereço,
+Então este campo deve ser disable, sem possibilidade do usuário inputar palavras manualmente";Campo endereço/ Tela de criação de contato;Aprovado;campo disable;;28/jun;jennifer;https://jam.dev/c/08fb3c26-ae86-41a2-a203-30e4b041d3cc
+TC-05;editar contato;edição;Estar na tela principal/listagem;"1. Na tela principal, listagem, em um dos contatos, clicar no icone de info
+2. Na tela de detalhes do contato, clicar no icone de edição
+3. Na tela de edição, editar um dos campos, ou mais campos.
+4. clicar em salvar, no icone de nuvem";"Quando o usuário editar um dos campos,
+E clicar em salvar,
+E após isso, na listage, clicar no icone de informação do contato que foi editado,
+Então na tela de informação, deverá constar a mudança no valor do campo.";Campos: nome, tipo, numero e endereço/ tela de visualização de contatos;Aprovado;;;28/jun;jennifer;https://jam.dev/c/66218252-edfb-4c2b-b166-4f6cb03386bc
+TC-06;excluir contato;exclusão;Estar na tela de detalhes do contato;"1. Na tela principal, na listagem, em um dos contatos, clicar no icone de info
+2. Na tela de detalhes do contato, clicar no icone de lixeira
+3. Confirmar no pop-up de confirmação";"Quando o usuário clicar em excluir,
+E confirmar a ação no modal ou pop-up de confirmação,
+Então o contato deve ser excluído e o usuário redirecionado para a tela de listagem";Tela principal;Reprovado;não há pop-up de confirmação. O contato é excluído imediatamente após o clique em excluir, porém o usuário deve ser notificado a confirmação da ação que não pode ser desfeita.;Média;28/jun;jennifer;https://jam.dev/c/dc92f559-c530-4f01-9ee4-a589ac57bbdd
+TC-07;visualizar contato não existente;consulta;Acessar o insomnia;"1. Acessar o postman
+2. Inserir o endpoint com um id não existente no parametro da rota
+3. buscar";retorno da api deve ser erro 404;Chave resposta/ Postman;Aprovado;;;28/jun;jennifer;https://drive.google.com/file/d/1kVptHEWJIipzMehHbcai_kbs88f2dm1K/view?usp=sharing
+TC-08;mudar paginação;paginação;Estar na tela principal/listagem;1. Na tela principal, abaixo da listagem, clicar na seta dupla direita para ver outros contatos, e clicar na seta dupla esquerda para ver os primeiro contatos;"A listagem deve exibir outros contatos nas próximas páginas, sendo 6 contatos por página
+Quando o usuário clicar em ""próxima página"",
+Então a listagem deve exibir outros 6 registros.";Listagem/ Tela principal;Aprovado;;;28/jun;jennifer;https://jam.dev/c/7902d672-b534-4d4e-9584-85ae503ed94c
+TC-09;listagem sem registros;consulta;"1. Estar na tela principal/listagem
+2. Não ter nenhum contato na agenda";1. Acessar a tela principal, onde se encontra a listagem;"Quando usuário acessar a tela principal,
+E não havendo nenhum contato cadastrado,
+Então o usuário visualizará a mensagem ""Nenhum contato encontrado""";Listagem/ Tela principal;Reprovado;;Alta;28/jun;jennifer;https://jam.dev/c/3f848e8e-25ac-442b-b9b9-176742e423f8
+TC-10;visualizar detalhes de contato existente;consulta;Estar na tela principal/listagem;1. Na tela principal, clicar no icone de informação, em um dos contatos;"Quando o usuário clicar no ícone de info, 
+E este for redirecionado para a tela de detalhes do contato,
+Então ele poderá visualizar nome, tipo, telefone e endereço, bem como as funcionalidades de editar, excluir e retornar para tela principal";Tela de detalhes do contato;Aprovado;;;28/jun;jennifer;https://jam.dev/c/6f5d4c77-47d9-410e-8b78-a52b1d39d8bd
+TC-11;retornar para tela principal/listagem a partir da tela de cadastro de um novo contato;usabilidade;Estar na tela de criação de contato;1. Na tela de cadastro de novo um contato, no ícone de seta para esquerda, localizado no canto inferior esquerdo, clicar sobre ela;"Quando o usuário clicar na seta para retornar,
+Então este deve ser redirecionado para a tela principal";Tela de cadastro de contato;Aprovado;;;28/jun;jennifer;https://jam.dev/c/7d091b25-a9cc-49e8-9407-ffb50234e81d
+TC-12;validação do campo numero, na criação do contato;cadastro;Estar na tela de criação do contato;1. Na tela de criação de um contato, clicar no campo numero;"Quando o usuário clicar no campo ""número"",
+E digitar letras, ou digitar mais de 15 números,
+Então o campo não anotará o valor.";Tela de cadastro de contato;Aprovado;;;28/jun;jennifer;https://jam.dev/c/9ed65ee7-9924-409b-a1a6-8f1ff0cc5210
+TC-13;retornar para tela de detalhes a partir da tela de edição de um novo contato;usabilidade;Estar na tela de edição;1. Na tela de edição clicar no icone de volta(seta para esquerda);"Quando o usuário clicar no icone de voltar,
+Então o usuário será redirecionado para a tela de edição";Tela de edição;Reprovado;Usuário, ao voltar, esta sendo redirecionado para a tela principal, e não a tela de edição, ao qual estava anteriormente.;Alta;28/jun;jennifer;https://jam.dev/c/f2f93bfd-ce89-4e1d-8822-950f8f59f21a
+TC-14;Listagem deve exibir contatos em ordem crescente;usabilidade;Estar na tela principal;1. Acessar a tela principal, onde se encontra a listagem;"Quando o usuário visualizar a listagem,
+Então o nome dos contatos devem estar em ordem crescente/alfabetica";Listagem/ Tela principal;Reprovado;Não esta em ordem alfabética;Alta;;;https://jam.dev/c/93719506-6be3-451d-b9fd-e3e5b34afe06
+TC-15;Usuário deve conseguir buscar contato por nome;busca;Estar na tela principal;1. Clicar no campo buscar e digitar o nome do contato;"Quando o usuário clicar no campo de busca,
+E digitar um nome,
+Então todos os contatos com aquele nome, deverão ser listados";Listagem/ Tela principal;Aprovado;;;;;https://jam.dev/c/79af34b0-f24f-4eca-9f65-0066931cbc48
+TC-16;Usuário deve conseguir buscar contato por letra;busca;Estar na tela principal;1. Clicar no campo buscar e digitar uma letra;"Quando o usuário clicar no campo de busca,
+E digitar uma letra,
+Então todos os contatos que contenham aquela letra, deverão ser listados";Listagem/ Tela principal;Aprovado;;;;;https://jam.dev/c/79af34b0-f24f-4eca-9f65-0066931cbc48
+;;;;;;;;;;;;
